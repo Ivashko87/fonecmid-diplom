@@ -50,10 +50,6 @@
 	<object>
 		<name>AccumulationRegister.ОбработкаЗаказов.Dimension.Заказ</name>
 		<right>
-			<name>View</name>
-			<value>false</value>
-		</right>
-		<right>
 			<name>Edit</name>
 			<value>false</value>
 		</right>
@@ -408,10 +404,6 @@
 	</object>
 	<object>
 		<name>AccumulationRegister.ОбработкаЗаказов.Dimension.Договор</name>
-		<right>
-			<name>View</name>
-			<value>false</value>
-		</right>
 		<right>
 			<name>Edit</name>
 			<value>false</value>
@@ -15506,11 +15498,18 @@
 		</right>
 	</object>
 	<object>
-		<name>AccumulationRegister.ОбработкаЗаказов.StandardAttribute.Active</name>
+		<name>AccumulationRegister.ОбработкаЗаказов</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
 		<right>
 			<name>View</name>
-			<value>false</value>
+			<value>true</value>
 		</right>
+	</object>
+	<object>
+		<name>AccumulationRegister.ОбработкаЗаказов.StandardAttribute.Active</name>
 		<right>
 			<name>Edit</name>
 			<value>false</value>
@@ -15519,10 +15518,6 @@
 	<object>
 		<name>AccumulationRegister.ОбработкаЗаказов.StandardAttribute.LineNumber</name>
 		<right>
-			<name>View</name>
-			<value>false</value>
-		</right>
-		<right>
 			<name>Edit</name>
 			<value>false</value>
 		</right>
@@ -15530,20 +15525,12 @@
 	<object>
 		<name>AccumulationRegister.ОбработкаЗаказов.StandardAttribute.Recorder</name>
 		<right>
-			<name>View</name>
-			<value>false</value>
-		</right>
-		<right>
 			<name>Edit</name>
 			<value>false</value>
 		</right>
 	</object>
 	<object>
 		<name>AccumulationRegister.ОбработкаЗаказов.StandardAttribute.Period</name>
-		<right>
-			<name>View</name>
-			<value>false</value>
-		</right>
 		<right>
 			<name>Edit</name>
 			<value>false</value>
@@ -18315,10 +18302,6 @@
 	</object>
 	<object>
 		<name>AccumulationRegister.ОбработкаЗаказов.Dimension.Контрагент</name>
-		<right>
-			<name>View</name>
-			<value>false</value>
-		</right>
 		<right>
 			<name>Edit</name>
 			<value>false</value>
@@ -22689,10 +22672,6 @@
 	<object>
 		<name>AccumulationRegister.ОбработкаЗаказов.Resource.СуммаОтгрузки</name>
 		<right>
-			<name>View</name>
-			<value>false</value>
-		</right>
-		<right>
 			<name>Edit</name>
 			<value>false</value>
 		</right>
@@ -23983,10 +23962,6 @@
 	<object>
 		<name>AccumulationRegister.ОбработкаЗаказов.Resource.СуммаОплаты</name>
 		<right>
-			<name>View</name>
-			<value>false</value>
-		</right>
-		<right>
 			<name>Edit</name>
 			<value>false</value>
 		</right>
@@ -24136,10 +24111,6 @@
 	</object>
 	<object>
 		<name>AccumulationRegister.ОбработкаЗаказов.Resource.СуммаЗаказа</name>
-		<right>
-			<name>View</name>
-			<value>false</value>
-		</right>
 		<right>
 			<name>Edit</name>
 			<value>false</value>

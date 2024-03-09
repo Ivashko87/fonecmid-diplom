@@ -41,33 +41,39 @@
 			</title>
 		</field>
 		<field xsi:type="DataSetFieldField">
-			<dataPath>Документы</dataPath>
-			<field>Документы</field>
+			<dataPath>Выставлено</dataPath>
+			<field>Выставлено</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>ru</v8:lang>
-					<v8:content>Документы</v8:content>
+					<v8:content>Выставлено</v8:content>
 				</v8:item>
 			</title>
-			<role>
-				<dcscom:periodNumber>1</dcscom:periodNumber>
-				<dcscom:periodType>Main</dcscom:periodType>
-			</role>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>Заказ</dataPath>
+			<field>Заказ</field>
 		</field>
 		<dataSource>ИсточникДанных1</dataSource>
 		<query>ВЫБРАТЬ
-	ВКМ_ВыполненныеКлиентуРаботыОбороты.Регистратор КАК Документы,
-	ВКМ_ВыполненныеКлиентуРаботыОбороты.Контрагент КАК Контрагент,
-	ВКМ_ВыполненныеКлиентуРаботыОбороты.Договор КАК Договор,
-	ВКМ_ВыполненныеКлиентуРаботыОбороты.Договор.ВКМ_СуммаАбоненсткойПлаты КАК АбоненсткаяПлата,
-	ВКМ_ВыполненныеКлиентуРаботыОбороты.СуммаОборот КАК РаботыСпециалиста
+	ЕСТЬNULL(ВКМ_ВыполненныеКлиентуРаботыОбороты.Контрагент, ОбработкаЗаказовОбороты.Контрагент) КАК Контрагент,
+	ЕСТЬNULL(ВКМ_ВыполненныеКлиентуРаботыОбороты.Договор, ОбработкаЗаказовОбороты.Договор) КАК Договор,
+	ЕСТЬNULL(ВКМ_ВыполненныеКлиентуРаботыОбороты.Договор.ВКМ_СуммаАбоненсткойПлаты, ОбработкаЗаказовОбороты.ВКМ_СтоимостьУслугОборот) КАК АбоненсткаяПлата,
+	ВКМ_ВыполненныеКлиентуРаботыОбороты.СуммаОборот КАК РаботыСпециалиста,
+	ОбработкаЗаказовОбороты.ВКМ_СтоимостьУслугОборот КАК Выставлено
 ИЗ
-	РегистрНакопления.ВКМ_ВыполненныеКлиентуРаботы.Обороты(, , Регистратор, ) КАК ВКМ_ВыполненныеКлиентуРаботыОбороты</query>
+	РегистрНакопления.ВКМ_ВыполненныеКлиентуРаботы.Обороты(, , , ) КАК ВКМ_ВыполненныеКлиентуРаботыОбороты
+		ПОЛНОЕ СОЕДИНЕНИЕ РегистрНакопления.ОбработкаЗаказов.Обороты КАК ОбработкаЗаказовОбороты
+		ПО ВКМ_ВыполненныеКлиентуРаботыОбороты.Договор = ОбработкаЗаказовОбороты.Договор</query>
 	</dataSet>
 	<totalField>
 		<dataPath>РаботыСпециалиста</dataPath>
 		<expression>Сумма(РаботыСпециалиста)</expression>
 		<group>Договор</group>
+	</totalField>
+	<totalField>
+		<dataPath>Выставлено</dataPath>
+		<expression>Сумма(Выставлено)</expression>
 	</totalField>
 	<parameter>
 		<name>НачалоПериода</name>
@@ -134,10 +140,19 @@
 		<dcsset:settings xmlns:style="http://v8.1c.ru/8.1/data/ui/style" xmlns:sys="http://v8.1c.ru/8.1/data/ui/fonts/system" xmlns:web="http://v8.1c.ru/8.1/data/ui/colors/web" xmlns:win="http://v8.1c.ru/8.1/data/ui/colors/windows">
 			<dcsset:selection>
 				<dcsset:item xsi:type="dcsset:SelectedItemField">
-					<dcsset:field>Документы</dcsset:field>
+					<dcsset:field>Контрагент</dcsset:field>
+				</dcsset:item>
+				<dcsset:item xsi:type="dcsset:SelectedItemField">
+					<dcsset:field>Договор</dcsset:field>
+				</dcsset:item>
+				<dcsset:item xsi:type="dcsset:SelectedItemField">
+					<dcsset:field>АбоненсткаяПлата</dcsset:field>
 				</dcsset:item>
 				<dcsset:item xsi:type="dcsset:SelectedItemField">
 					<dcsset:field>РаботыСпециалиста</dcsset:field>
+				</dcsset:item>
+				<dcsset:item xsi:type="dcsset:SelectedItemField">
+					<dcsset:field>Выставлено</dcsset:field>
 				</dcsset:item>
 			</dcsset:selection>
 			<dcsset:dataParameters>
@@ -177,43 +192,12 @@
 				</dcscor:item>
 			</dcsset:outputParameters>
 			<dcsset:item xsi:type="dcsset:StructureItemGroup">
-				<dcsset:groupItems>
-					<dcsset:item xsi:type="dcsset:GroupItemField">
-						<dcsset:field>Контрагент</dcsset:field>
-						<dcsset:groupType>Items</dcsset:groupType>
-						<dcsset:periodAdditionType>None</dcsset:periodAdditionType>
-						<dcsset:periodAdditionBegin xsi:type="xs:dateTime">0001-01-01T00:00:00</dcsset:periodAdditionBegin>
-						<dcsset:periodAdditionEnd xsi:type="xs:dateTime">0001-01-01T00:00:00</dcsset:periodAdditionEnd>
-					</dcsset:item>
-					<dcsset:item xsi:type="dcsset:GroupItemField">
-						<dcsset:field>Договор</dcsset:field>
-						<dcsset:groupType>Items</dcsset:groupType>
-						<dcsset:periodAdditionType>None</dcsset:periodAdditionType>
-						<dcsset:periodAdditionBegin xsi:type="xs:dateTime">0001-01-01T00:00:00</dcsset:periodAdditionBegin>
-						<dcsset:periodAdditionEnd xsi:type="xs:dateTime">0001-01-01T00:00:00</dcsset:periodAdditionEnd>
-					</dcsset:item>
-					<dcsset:item xsi:type="dcsset:GroupItemField">
-						<dcsset:field>АбоненсткаяПлата</dcsset:field>
-						<dcsset:groupType>Items</dcsset:groupType>
-						<dcsset:periodAdditionType>None</dcsset:periodAdditionType>
-						<dcsset:periodAdditionBegin xsi:type="xs:dateTime">0001-01-01T00:00:00</dcsset:periodAdditionBegin>
-						<dcsset:periodAdditionEnd xsi:type="xs:dateTime">0001-01-01T00:00:00</dcsset:periodAdditionEnd>
-					</dcsset:item>
-				</dcsset:groupItems>
 				<dcsset:order>
 					<dcsset:item xsi:type="dcsset:OrderItemAuto"/>
 				</dcsset:order>
 				<dcsset:selection>
 					<dcsset:item xsi:type="dcsset:SelectedItemAuto"/>
 				</dcsset:selection>
-				<dcsset:item xsi:type="dcsset:StructureItemGroup">
-					<dcsset:order>
-						<dcsset:item xsi:type="dcsset:OrderItemAuto"/>
-					</dcsset:order>
-					<dcsset:selection>
-						<dcsset:item xsi:type="dcsset:SelectedItemAuto"/>
-					</dcsset:selection>
-				</dcsset:item>
 			</dcsset:item>
 		</dcsset:settings>
 	</settingsVariant>
